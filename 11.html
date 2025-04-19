@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript</title>
+  
+  </head>
+  <body>
+   
+    <script>
+       function groupByCategory(items) {
+            let result = {};
+
+            for (let i = 0; i < items.length; i++) {
+              let item = items[i];
+              let category = item.category;
+
+              if (result[category] === undefined) {
+                result[category] = [];
+              }
+
+              result[category].push(item);
+            }
+
+            return result;
+          }
+
+          const products = [
+            { name: 'Pen', category: 'Stationery' },
+            { name: 'Shirt', category: 'Clothes' },
+            { name: 'Notebook', category: 'Stationery' },
+            { name: 'Jeans', category: 'Clothes' }
+          ];
+
+          
+          console.log(groupByCategory(products));
+
+
+  
+      
+    </script>
+</body>
+</html>
+
