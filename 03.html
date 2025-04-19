@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript</title>
+  <style>
+    .highlight{
+      background-color:yellow;
+      width:60px;
+    }
+  </style>
+  </head>
+  <body>
+    <ul id="mylist">
+      <li>Apple</li>
+      <li>Banana</li>
+      <li>Cherry</li>
+      <li>Date</li>
+    </ul>
+    <script>
+      const listItems=document.querySelectorAll('#mylist li');
+      listItems.forEach(function(item, index) {
+      
+      console.log("Item " + (index + 1) + ": " + item.textContent);
+
+    
+      if ((index + 1) % 2 === 0) {
+        item.classList.add('highlight');
+      }
+    });
+
+    
+    console.log("Total list items:", listItems.length);
+  
+      
+    </script>
+</body>
+</html>
+
