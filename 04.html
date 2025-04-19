@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>JavaScript</title>
+  
+  </head>
+  <body>
+   
+    <script>
+       
+    // 1. Global Scope
+    var color = "Red"; 
+
+    function showColor() {
+      console.log("Global Scope:", color); 
+    }
+
+    showColor();
+    console.log("Access from outside function:", color); // it works
+
+    // 2. Function (Local) Scope
+    function sayHello() {
+      let greeting = "Hello!"; 
+      console.log("Local Scope:", greeting); 
+    }
+
+    sayHello();
+    console.log("Local Scope:", greeting); //it will not work
+
+    // 3. Block Scope (let, const inside {})
+    {
+      let fruit = "Apple";
+      const animal = "Cat";
+      console.log("Inside Block Scope:", fruit);  
+      console.log("Inside Block Scope:", animal); 
+    }
+
+    // 4. Variable Shadowing
+    let name = "Alice"; 
+
+    function showName() {
+      let name = "Bob";
+      console.log("Shadowed Name:", name); 
+    }
+
+    showName();
+    console.log("Original Name:", name); 
+
+    //  5. Hoisting with var
+    function testHoisting() {
+      console.log("Before:", number); 
+      var number = 10;
+      console.log("After:", number); 
+    }
+
+    testHoisting();
+  </script>
+</body>
+</html>
+
+
+  
+      
+    
+
