@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Login Page</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      background: #f0f0f0;
+    }
+
+    .login-container {
+      background: white;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 320px;
+    }
+
+    .login-container input,
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+
+    .message {
+      margin-top: 5px;
+      font-weight: bold;
+    }
+
+    .error-message { color: red; }
+    .success-message { color: green; }
+    .warning-message { color: orange; }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <h2>Login</h2>
+    <input type="email" id="email" placeholder="Email" required />
+    <input type="password" id="password" placeholder="Password" required />
+    <button onclick="checkLogin()">Login</button>
+
+    <p id="msg" class="message error-message" style="display: none;"></p>
+    <p id="success" class="message success-message" style="display: none;"></p>
+  </div>
+
+  <script>
+    const credentials = [
+      { email: "thuppathiindhu8@gmail.com", password: "Indhu@2003" },
+      { email: "thuppathiindhu5@.com", password: "indhu" }
+    ];
+
+    function checkPasswordStrength(pwd) {
+      const strongPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+      const mediumPattern = /^(?=.*[a-zA-Z])(?=.*\d).{6,}$/;
+
+      if (pwd.length === 0) return "empty";
+      if (strongPattern.test(pwd)) return "strong";
+      if (mediumPattern.test(pwd)) return "medium";
+      return "weak";
+    }
+
+    function checkLogin() {
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const msg = document.getElementById('msg');
+      const success = document.getElementById('success');
+
+      msg.style.display = "none";
+      success.style.display = "none";
+
+      // Check for empty fields
+      if (!email && !password) {
+        msg.textContent = "Please enter email and password.";
+        msg.className = "message error-message";
+        msg.style.display = "block";
+        return;
+      } else if (!email) {
+        msg.textContent = "Please enter your email.";
+        msg.className = "message error-message";
+        msg.style.display = "block";
+        return;
+      } else if (!password) {
+        msg.textContent = "Please enter your password.";
+        msg.className = "message error-message";
+        msg.style.display = "block";
+        return;
+      }
+
+      // Check password strength
+      const strength = checkPasswordStrength(password);
+      if (strength === "weak") {
+        msg.textContent = "Weak password! Use uppercase, lowercase, number, and symbol.";
+        msg.className = "message warning-message";
+        msg.style.display = "block";
+        return;
+      }
+
+      // Check credentials
+      const match = credentials.find(user => user.email === email && user.password === password);
+
+      if (match) {
+        success.textContent = "Login successful!";
+        success.style.display = "block";
+        setTimeout(() => {
+          window.open("dashboard.html", "_blank");
+        }, 1000);
+      } else {
+        msg.textContent = "Invalid login!";
+        msg.className = "message error-message";
+        msg.style.display = "block";
+      }
+    }
+
+    document.addEventListener('keydown', function(event) {
+      if (event.key === 'Enter') {
+        checkLogin();
+      }
+    });
+  </script>
+</body>
+</html>
